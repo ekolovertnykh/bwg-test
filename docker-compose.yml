@@ -35,8 +35,8 @@ services:
     restart: always
     ports:
       - 3004:3000
-  bwg:
-    image: bwg:latest
+  balancer:
+    image: balancer:latest
     network_mode: bwg-net
     container_name: balancer
     restart: always
