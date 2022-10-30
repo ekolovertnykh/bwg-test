@@ -1,0 +1,50 @@
+version: "3"
+services:
+  redis:
+    image: redis:latest
+    network_mode: bwg-net
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
+  s1:
+    image: bwg-s1:latest
+    network_mode: bwg-net
+    container_name: s1
+    restart: always
+    ports:
+      - 3001:3000
+  s2:
+    image: bwg-s2:latest
+    network_mode: bwg-net
+    container_name: s2
+    restart: always
+    ports:
+      - 3002:3000
+  s3:
+    image: bwg-s3:latest
+    network_mode: bwg-net
+    container_name: s3
+    restart: always
+    ports:
+      - 3003:3000
+  s4:
+    image: bwg-s4:latest
+    network_mode: bwg-net
+    container_name: s4
+    restart: always
+    ports:
+      - 3004:3000
+  bwg:
+    image: bwg:latest
+    network_mode: bwg-net
+    container_name: balancer
+    restart: always
+    depends_on:
+      - s1
+      - s2
+      - s3
+      - s4
+      - redis
+    ports: 
+      - 1000:1000
